@@ -1,10 +1,96 @@
-[gd_scene load_steps=2 format=3 uid="uid://yqmk0vpvnyxr"]
+[gd_scene load_steps=10 format=4 uid="uid://yqmk0vpvnyxr"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://76hi8rt1miuo" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_grass.png" id="2_6b5hm"]
+[ext_resource type="PackedScene" uid="uid://q2ex7tga31wq" path="res://scenes/LoseCondition.tscn" id="3_aoa68"]
+[ext_resource type="Script" path="res://scenes/spawner.gd" id="4_g38li"]
+[ext_resource type="PackedScene" uid="uid://rkdi05v67sb8" path="res://scenes/falling_fish.tscn" id="5_7jrgq"]
+[ext_resource type="PackedScene" uid="uid://c2fj3ynmxfssg" path="res://scenes/win_condition.tscn" id="6_i8rb5"]
+[ext_resource type="Texture2D" uid="uid://7iu0eiou5jsd" path="res://assets/kenney_platformerpack/PNG/Items/flagGreen2.png" id="6_ka387"]
 
-[node name="Level1" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r1jd3"]
+texture = ExtResource("2_6b5hm")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, -2, 64, -64, 64, -64, -21)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, -2, 64, -64, 64, -64, -21)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -41, 35, -64, -3)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -4, 31, 39, -16, 56, -64, 64, -64, -3)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -4, 64, 64, 21, 34, -28, 2, -64, -21)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -21, 64, -20, 11, 13, -64, 64, -64, -21)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, 9, 64, -64, 64, -64, -21)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, 9, 64, -64, 64, -64, -21)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 9, 64, 9, 2, 6, -64, 10, -64, -21)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 9, 64, 9, 2, 6, -64, 10, -64, -21)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 9, 64, 9, 2, 6, -64, 10, -64, -21)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 9, 64, 9, 2, 6, -64, 10, -64, -21)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 8, 5, 64, 64, 64, 64, -2, 64, -64, 64, -64, -21)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, 1, 64, -64, 64, 64, 64, 64, -2, 64, -64, 64, -64, 64)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, 9, 64, -64, 64, -64, -21)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, 9, 64, -64, 64, -64, -21)
+8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 64, 64, 9, 64, -64, 64, -64, -21)
+
+[sub_resource type="TileSet" id="TileSet_suwto"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_r1jd3")
+
+[node name="main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(445, 209)
+scale = Vector2(1.16667, 1)
 collision_layer = 3
 collision_mask = 3
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(0, -1)
+tile_map_data = PackedByteArray("AAADAAIAAQAHAAEAAAACAAIAAQAHAAEAAAABAAIAAQADAAAAAAAEAAIAAQAHAAEAAAAFAAIAAQAHAAEAAAAGAAIAAQAEAAAAAAAIAAIAAQAAAAEAAAAKAAIAAQAAAAEAAAAMAAIAAQAAAAEAAAA=")
+tile_set = SubResource("TileSet_suwto")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="LoseCondition" parent="Sprite2D" instance=ExtResource("3_aoa68")]
+position = Vector2(663, 500)
+scale = Vector2(115.415, 7.44059)
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(963, -406)
+script = ExtResource("4_g38li")
+obstacle = ExtResource("5_7jrgq")
+
+[node name="Spawner2" type="Node2D" parent="."]
+position = Vector2(1490, -406)
+script = ExtResource("4_g38li")
+obstacle = ExtResource("5_7jrgq")
+
+[node name="Spawner3" type="Node2D" parent="."]
+position = Vector2(1227, -415)
+script = ExtResource("4_g38li")
+obstacle = ExtResource("5_7jrgq")
+
+[node name="FinishLine" type="Sprite2D" parent="."]
+position = Vector2(1611, 208)
+scale = Vector2(0.557668, 0.754534)
+texture = ExtResource("6_ka387")
+
+[node name="WinCondition" parent="FinishLine" instance=ExtResource("6_i8rb5")]
+scale = Vector2(6.37699, 6.48177)
