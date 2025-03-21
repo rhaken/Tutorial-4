@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://2n5uf74vh80t"]
+[gd_scene load_steps=12 format=4 uid="uid://2n5uf74vh80t"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1_4brxl"]
 [ext_resource type="PackedScene" uid="uid://q2ex7tga31wq" path="res://scenes/LoseCondition.tscn" id="1_7be88"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://upnlu5w7qpod" path="res://scenes/obstacle_baru.tscn" id="4_bavsj"]
 [ext_resource type="Texture2D" uid="uid://b01y2s6ghnd3g" path="res://assets/kenney_platformerpack/PNG/Items/flagRed1.png" id="5_4ouxq"]
 [ext_resource type="Script" path="res://scenes/tamat.gd" id="6_2kdj7"]
+[ext_resource type="PackedScene" uid="uid://byudw7aq6t2jq" path="res://scenes/HealthBar.tscn" id="8_egtow"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbilp"]
 texture = ExtResource("2_c4h3e")
@@ -85,5 +86,9 @@ script = ExtResource("6_2kdj7")
 position = Vector2(16, 8)
 scale = Vector2(-1.93769, 2.43508)
 shape = SubResource("RectangleShape2D_py6n1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("8_egtow")]
 
 [connection signal="body_entered" from="Tamat/Area2D" to="Tamat/Area2D" method="_on_body_entered"]

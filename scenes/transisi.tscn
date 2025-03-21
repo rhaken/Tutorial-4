@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq4syva1xa7b"]
+
+[ext_resource type="Script" path="res://text_transisi.gd" id="1_p3sc6"]
+[ext_resource type="Texture2D" uid="uid://chgqimvh7rdh6" path="res://assets/Familiar Looking Rocket.png" id="1_t1bxc"]
+[ext_resource type="Script" path="res://scenes/next_level.gd" id="3_26180"]
+
+[node name="Transisi" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(598, 241)
+texture = ExtResource("1_t1bxc")
+
+[node name="TextTransisi" type="Label" parent="."]
+offset_left = 492.0
+offset_top = 495.0
+offset_right = 532.0
+offset_bottom = 518.0
+script = ExtResource("1_p3sc6")
+
+[node name="NextLevel" type="LinkButton" parent="."]
+offset_left = 554.0
+offset_top = 550.0
+offset_right = 636.0
+offset_bottom = 590.0
+text = "Next Level"
+script = ExtResource("3_26180")
+
+[connection signal="pressed" from="NextLevel" to="TextTransisi" method="_on_next_level_pressed"]
